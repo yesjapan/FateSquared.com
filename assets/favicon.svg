@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#221872"/>
+      <stop offset="1" stop-color="#0a0930"/>
+    </linearGradient>
+    <linearGradient id="door" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffd166"/>
+      <stop offset="1" stop-color="#d9931b"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="12" fill="url(#bg)"/>
+  <!-- tower glass -->
+  <g stroke="#9c92ff" stroke-opacity=".18" stroke-width="1">
+    <path d="M12 0v64M24 0v64M36 0v64M48 0v64M0 20h64M0 40h64"/>
+  </g>
+  <!-- magenta ground -->
+  <path d="M0 52 L64 44 L64 64 L0 64Z" fill="#ff1f8f"/>
+  <!-- the F -->
+  <path d="M14 10h26v8H23v9h14v8H23v17h-9z" fill="#f3f0ff"/>
+  <!-- the door / squared mark -->
+  <rect x="44" y="12" width="8" height="15" fill="url(#door)"/>
+</svg>
