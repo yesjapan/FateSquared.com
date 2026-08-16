@@ -25,7 +25,7 @@ Opening `index.html` directly from disk also works (fonts load from Google Fonts
 
 ## Before launch — checklist
 
-1. **Author photo** — `assets/author.jpg` is currently a small crop lifted from the back cover. Replace it with the original portrait (see [assets/README.md](assets/README.md)). Covers and the social-share image are already in place.
+1. ~~**Author photo**~~ — done: hi-res portrait in place. Covers, spine and the social-share image are all in place too (see [assets/README.md](assets/README.md)).
 2. **Retailer links** — in `index.html`, the `<ul class="retailers">` list. They currently point at ISBN searches (`9781959949046`) on Amazon, Barnes & Noble and Bookshop.org, which resolve once the book is listed. Swap in direct product URLs when you have them; Apple Books and Kobo rows are there commented out.
 3. **Release date** — the hero meta and the "Get the book" copy say **2026**. Tighten to a month/day when known (also `datePublished` in the JSON-LD block in `<head>`).
 4. **Notify-me list** — wired for **Kit** (kit.com, free to 10k subscribers). One-time setup:
