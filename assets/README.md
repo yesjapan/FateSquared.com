@@ -11,8 +11,8 @@ initials block, hidden section) if one is missing.
 | `author.jpg` | ✅ in place | 1000×1250 (4:5), cropped from `Graphics/author.png` (3840×2160). Crop region located by template-matching the back-cover portrait against the 4K frame, then widened to 4:5. |
 | `og.jpg` | ✅ generated | 1200×630 social-share image: front cover over a blurred full spread. Regenerate any time with the ffmpeg command below. |
 | `chapter-1.mp3` | optional | If present, the **Listen** section and nav link appear automatically. |
-| `FateSquaredR-Regular.woff2` | ✅ in place | The cover's display face, used for the hero FATE / SQUARED lockup. Converted from the supplied `FateSquaredR-Regular.ttf` (18.8 KB vs 35.8 KB). Both are referenced in `@font-face`; the TTF is only fetched by browsers without WOFF2 support. |
-| `FateSquaredR-Regular.ttf` | ✅ in place | Original supplied font file, kept as the fallback source. |
+| `FateSquared-Bold.woff2` / `.ttf` | ✅ in use | The cover's display face, Bold cut — drives the hero FATE / SQUARED lockup. WOFF2 (19.1 KB) is served; the TTF is the fallback for browsers without WOFF2. |
+| `FateSquared-Regular.woff2` / `.ttf` | declared, unused | The Regular cut, declared at `font-weight: 400` under the same `FateSquared` family. Nothing currently uses it, so it is never downloaded — switch `.hero__title { font-weight }` to 400 to try it. |
 | `favicon.svg` | ✅ in place | Tab icon. Replace if you like. |
 
 Regenerate `og.jpg` from the source graphics:
@@ -39,11 +39,11 @@ Source graphics live at `G:\My Drive\File Cabinet\Novels\Fate Squared\Graphics`.
 
 ## Hero title weight
 
-The hero lockup uses the cover face at its natural weight plus a small optical
-boost. Both knobs live on `.hero__title` in `styles.css`:
+The hero lockup uses the **Bold** cut as drawn. Both knobs live on
+`.hero__title` in `styles.css`:
 
 ```css
---title-boost:   0.022em;              /* thickens solid FATE; 0 = natural weight */
+--title-boost:   0;                    /* synthetic extra weight; 0 = as drawn */
 --title-outline: max(2.5px, 0.019em);  /* hollow magenta stroke on SQUARED */
 ```
 
@@ -52,15 +52,17 @@ Measured stem-to-cap-height ratios, for reference when tuning:
 | | stem/cap | width/cap |
 |---|---|---|
 | printed cover "FATE" | 0.160 | 2.42 |
-| FateSquaredR (natural) | 0.309 | 1.74 |
+| **FateSquared Bold (in use)** | **0.374** | **2.01** |
+| FateSquared Regular | 0.309 | 1.74 |
 | Big Shoulders 900 (previous) | 0.421 | 1.97 |
 
-The face is already a black weight, so raise `--title-boost` only a little —
-past about `0.05em` the stroke starts rounding corners and closing counters.
+Bold sits within ~11% of the weight it replaced and has practically the same
+footprint. Set `--title-boost: 0.06em` to match the old weight exactly; past
+roughly `0.08em` the stroke starts rounding corners and closing counters.
 
-Regenerate the WOFF2 after replacing the TTF:
+Regenerate the WOFF2 files after replacing a TTF:
 
 ```
 python -m pip install "fonttools[woff]" brotli
-python -c "from fontTools.ttLib import TTFont; f=TTFont('FateSquaredR-Regular.ttf'); f.flavor='woff2'; f.save('FateSquaredR-Regular.woff2')"
+python -c "from fontTools.ttLib import TTFont; f=TTFont('FateSquared-Bold.ttf'); f.flavor='woff2'; f.save('FateSquared-Bold.woff2')"
 ```

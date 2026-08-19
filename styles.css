@@ -23,7 +23,7 @@
 
   --display: "Big Shoulders Display", Impact, "Arial Narrow", sans-serif;
   --body: "Instrument Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  --title: "FateSquaredR", "Big Shoulders Display", Impact, sans-serif;
+  --title: "FateSquared", "Big Shoulders Display", Impact, sans-serif;
 
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-io: cubic-bezier(0.65, 0, 0.35, 1);
@@ -35,11 +35,21 @@
 }
 
 /* The cover's own display face, used for the hero lockup so the page title
-   and the jacket read as the same object. */
+   and the jacket read as the same object. Two weights are declared under one
+   family, so the lockup weight is just `font-weight` on .hero__title. Only the
+   weight actually used gets downloaded. */
 @font-face {
-  font-family: "FateSquaredR";
-  src: url("assets/FateSquaredR-Regular.woff2") format("woff2"),
-       url("assets/FateSquaredR-Regular.ttf") format("truetype");
+  font-family: "FateSquared";
+  src: url("assets/FateSquared-Bold.woff2") format("woff2"),
+       url("assets/FateSquared-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "FateSquared";
+  src: url("assets/FateSquared-Regular.woff2") format("woff2"),
+       url("assets/FateSquared-Regular.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -266,7 +276,7 @@ em { font-style: italic; }
 .hero__title {
   margin: 1.1rem 0 1.6rem;
   font-family: var(--title);
-  font-weight: 400;              /* the cover face ships a single weight */
+  font-weight: 700;              /* the cover face's Bold cut */
   font-size: clamp(84px, 14.5vw, 200px);
   line-height: 0.86;
   letter-spacing: 0.005em;
@@ -275,13 +285,15 @@ em { font-style: italic; }
   display: flex; flex-direction: column;
 }
 /* Weight tuning for the cover face.
-   --title-boost thickens the solid word; the face is already a black weight
-   (stem/cap 0.31), so this is a nudge, not a fake bold. Set it to 0 for the
-   font's natural weight, or raise it toward 0.05em for a heavier lockup.
+   The Bold cut is used as drawn (stem/cap 0.374, within ~11% of the Big
+   Shoulders 900 it replaced, and the same overall footprint), so no synthetic
+   weight is added — light type on a dark ground already reads slightly heavier
+   than it measures. Raise --title-boost to about 0.06em to match the old
+   weight exactly; past that the stroke rounds corners and closes counters.
    --title-outline is the hollow stroke on SQUARED, floored so it stays
    visible at small viewport sizes. */
 .hero__title {
-  --title-boost: 0.022em;
+  --title-boost: 0;
   --title-outline: max(2.5px, 0.019em);
 }
 .hero__word {
