@@ -23,6 +23,7 @@
 
   --display: "Big Shoulders Display", Impact, "Arial Narrow", sans-serif;
   --body: "Instrument Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --title: "FateSquaredR", "Big Shoulders Display", Impact, sans-serif;
 
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-io: cubic-bezier(0.65, 0, 0.35, 1);
@@ -31,6 +32,17 @@
   --pad: clamp(20px, 5vw, 76px);
   --nav-h: 76px;
   --book-thick: 30px;
+}
+
+/* The cover's own display face, used for the hero lockup so the page title
+   and the jacket read as the same object. */
+@font-face {
+  font-family: "FateSquaredR";
+  src: url("assets/FateSquaredR-Regular.woff2") format("woff2"),
+       url("assets/FateSquaredR-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
 }
 
 *,
@@ -253,19 +265,33 @@ em { font-style: italic; }
 
 .hero__title {
   margin: 1.1rem 0 1.6rem;
-  font-family: var(--display);
-  font-weight: 900;
+  font-family: var(--title);
+  font-weight: 400;              /* the cover face ships a single weight */
   font-size: clamp(84px, 14.5vw, 200px);
-  line-height: 0.8;
+  line-height: 0.86;
   letter-spacing: 0.005em;
   text-transform: uppercase;
   color: var(--cream);
   display: flex; flex-direction: column;
 }
-.hero__word { display: block; }
+/* Weight tuning for the cover face.
+   --title-boost thickens the solid word; the face is already a black weight
+   (stem/cap 0.31), so this is a nudge, not a fake bold. Set it to 0 for the
+   font's natural weight, or raise it toward 0.05em for a heavier lockup.
+   --title-outline is the hollow stroke on SQUARED, floored so it stays
+   visible at small viewport sizes. */
+.hero__title {
+  --title-boost: 0.022em;
+  --title-outline: max(2.5px, 0.019em);
+}
+.hero__word {
+  display: block;
+  -webkit-text-stroke: var(--title-boost) var(--cream);
+  paint-order: stroke fill;   /* thicken outward without eating the counters */
+}
 .hero__word--outline {
   color: transparent;
-  -webkit-text-stroke: 2px var(--magenta);
+  -webkit-text-stroke: var(--title-outline) var(--magenta);
   text-shadow: 0 0 40px rgba(255, 31, 143, 0.28);
   padding-left: 0.02em; /* optical: stroke needs a hair of breathing room */
 }
