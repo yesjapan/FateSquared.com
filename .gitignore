@@ -13,3 +13,6 @@ npm-debug.log*
 # Local scratch
 *.log
 scratch/
+
+# local working notes, not part of the site
+GITHUB-SUPPORT-DRAFT.md
