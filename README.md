@@ -51,6 +51,26 @@ Hosted on **GitHub Pages** from the `main` branch of [github.com/yesjapan/FateSq
 
 Workflow: edit → `git commit` → `git push`. Nothing to build.
 
+## Cache busting
+
+`index.html` links the stylesheet and script with a version query:
+
+```html
+<link rel="stylesheet" href="styles.css?v=2">
+<script src="script.js?v=2" defer></script>
+```
+
+**Bump both numbers whenever you edit `styles.css` or `script.js`.** GitHub Pages
+serves those files with `Cache-Control: max-age=14400`, so without the bump a
+returning visitor keeps the old copy for up to four hours. The HTML itself is
+only cached for 10 minutes, so a bumped version propagates quickly.
+
+Images and fonts do not need this — replacing one means changing its filename.
+
+If the site is behind the Cloudflare proxy, also purge the Cloudflare cache
+(Caching → Configuration → Purge Everything) after a deploy, or move hosting to
+Cloudflare Pages, where each deploy invalidates automatically.
+
 ## Design notes
 
 Palette, type and motifs come straight off the jacket: indigo tower-glass grid, hot magenta, one gold doorway (used for the primary buttons and the notify frame). Display type is *Big Shoulders Display*, body is *Instrument Sans*. Everything respects `prefers-reduced-motion`.
