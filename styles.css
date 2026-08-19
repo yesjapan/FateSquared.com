@@ -218,7 +218,7 @@ em { font-style: italic; }
 }
 
 .nav__brand {
-  font-family: var(--display); font-weight: 900; font-size: 2rem; line-height: 1;
+  font-family: var(--title); font-weight: 700; font-size: 2rem; line-height: 1;
   letter-spacing: 0.02em; color: var(--cream); text-decoration: none;
   display: inline-flex; align-items: flex-start;
 }
@@ -866,8 +866,9 @@ html.has-notify [data-no-notify] { display: none !important; }
   display: flex; flex-wrap: wrap; align-items: center; gap: 0.6rem 2.5rem;
   font-size: 0.8rem; color: var(--muted);
 }
+/* Same mark as the nav, so it tracks the same face. */
 .footer__brand {
-  font-family: var(--display); font-weight: 900; font-size: 1.6rem; line-height: 1; color: var(--cream);
+  font-family: var(--title); font-weight: 700; font-size: 1.6rem; line-height: 1; color: var(--cream);
   display: inline-flex; align-items: flex-start;
 }
 .footer__brand sup { font-size: 0.5em; margin-left: 0.08em; color: var(--magenta); }
