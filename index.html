@@ -34,7 +34,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500;700;900&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=2">
+  <link rel="stylesheet" href="styles.css?v=3">
 
   <script type="application/ld+json">
   {
@@ -223,6 +223,23 @@
       <div class="section-head reveal">
         <h2>Get the book</h2>
       </div>
+
+      <!-- Countdown to release. data-release is a local-midnight date; the script
+           reads it, and once the date passes it swaps the whole section into its
+           released state (countdown and the not-yet-on-sale notice both hide),
+           so the page ages correctly with no edit needed. -->
+      <div class="countdown reveal" id="countdown" data-release="2026-10-29">
+        <p class="countdown__eyebrow">On sale in</p>
+        <div class="countdown__units" aria-hidden="true">
+          <div class="countdown__unit"><span class="countdown__num" id="cdDays">—</span><span class="countdown__label" id="cdDaysL">Days</span></div>
+          <div class="countdown__unit"><span class="countdown__num" id="cdHours">—</span><span class="countdown__label">Hours</span></div>
+          <div class="countdown__unit"><span class="countdown__num" id="cdMins">—</span><span class="countdown__label">Minutes</span></div>
+          <div class="countdown__unit"><span class="countdown__num" id="cdSecs">—</span><span class="countdown__label">Seconds</span></div>
+        </div>
+        <p class="countdown__out" hidden>Out now.</p>
+        <p class="sr-only">Fate Squared is released on October 29, 2026.</p>
+      </div>
+
       <div class="buy__grid">
         <div class="buy__intro reveal">
           <p class="lede"><em>Fate Squared</em> arrives <strong>October 29, 2026</strong> from Sandspeck Press. Order from your favorite bookseller, or ask for it at your local bookstore.</p>
@@ -241,6 +258,15 @@
           <!-- <li><a href="" target="_blank" rel="noopener">Apple Books <span class="retailers__arrow" aria-hidden="true">→</span></a></li> -->
           <!-- <li><a href="" target="_blank" rel="noopener">Kobo <span class="retailers__arrow" aria-hidden="true">→</span></a></li> -->
         </ul>
+
+        <!-- Shown only before the release date (script.js hides it after).
+             WHEN PRE-ORDERS OPEN: rewrite this to point at the live pre-order
+             page, or delete the block entirely if every link is orderable. -->
+        <p class="buy__notice reveal" id="buyNotice">
+          <strong>Not on sale yet.</strong> These links run an ISBN search at each store, so
+          they will not find <em>Fate Squared</em> until it is listed. Nothing to order today —
+          the countdown above is the honest answer.
+        </p>
       </div>
     </section>
 
@@ -290,6 +316,6 @@
     <p class="footer__isbn">ISBN 978-1-959949-04-6</p>
   </footer>
 
-  <script src="script.js?v=2" defer></script>
+  <script src="script.js?v=3" defer></script>
 </body>
 </html>

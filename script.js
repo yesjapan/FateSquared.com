@@ -203,6 +203,52 @@
   }
 
   /* ------------------------------------------------------------------
+     Countdown to release.
+     Counts to local midnight on the release date, so every visitor sees
+     "0 days" on the day itself regardless of timezone. Once the date has
+     passed, html.is-released hides the clock and the not-yet-on-sale
+     notice and shows "Out now" — the page ages correctly on its own.
+     ------------------------------------------------------------------ */
+  const cd = $('#countdown');
+  if (cd && cd.dataset.release) {
+    const [yy, mm, dd] = cd.dataset.release.split('-').map(Number);
+    const target = new Date(yy, mm - 1, dd, 0, 0, 0, 0);   // local midnight
+    const out = $('.countdown__out', cd);
+    const parts = { d: $('#cdDays'), h: $('#cdHours'), m: $('#cdMins'), s: $('#cdSecs') };
+    const dayLabel = $('#cdDaysL');
+    const pad = (n) => (n < 10 ? '0' : '') + n;
+    let timer = null;
+
+    const release = () => {
+      document.documentElement.classList.add('is-released');
+      if (out) out.hidden = false;
+      if (timer) clearInterval(timer);
+    };
+
+    const tick = () => {
+      let diff = target.getTime() - Date.now();
+      if (diff <= 0) { release(); return; }
+      diff = Math.floor(diff / 1000);
+      const d = Math.floor(diff / 86400);
+      const h = Math.floor((diff % 86400) / 3600);
+      const m = Math.floor((diff % 3600) / 60);
+      const sec = diff % 60;
+      parts.d.textContent = String(d);
+      parts.h.textContent = pad(h);
+      parts.m.textContent = pad(m);
+      parts.s.textContent = pad(sec);
+      if (dayLabel) dayLabel.textContent = d === 1 ? 'Day' : 'Days';
+    };
+
+    tick();
+    if (!document.documentElement.classList.contains('is-released')) {
+      timer = window.setInterval(tick, 1000);
+      // Re-sync after the tab has been asleep, so the clock is never stale.
+      document.addEventListener('visibilitychange', () => { if (!document.hidden) tick(); });
+    }
+  }
+
+  /* ------------------------------------------------------------------
      Notify: release-alert list.
      Active only once the form action has a real endpoint (no placeholder).
      When active: html.has-notify flips the hero/nav CTAs to "Notify me",

@@ -26,7 +26,10 @@ Opening `index.html` directly from disk also works (fonts load from Google Fonts
 ## Before launch — checklist
 
 1. ~~**Author photo**~~ — done: hi-res portrait in place. Covers, spine and the social-share image are all in place too (see [assets/README.md](assets/README.md)).
-2. **Retailer links** — in `index.html`, the `<ul class="retailers">` list. They currently point at ISBN searches (`9781959949046`) on Amazon, Barnes & Noble and Bookshop.org, which resolve once the book is listed. Swap in direct product URLs when you have them; Apple Books and Kobo rows are there commented out.
+2. **Retailer links / pre-order** — the `<ul class="retailers">` list points at ISBN searches, and the `#buyNotice` block under it tells visitors the book is not on sale yet. **KDP does not offer pre-orders for paperback**, only for Kindle ebooks (set up in KDP with a release date up to a year out; the final manuscript must be uploaded by KDP's deadline before that date). So if a Kindle pre-order goes live, edit `#buyNotice` to point at it, and delete the block entirely once everything is orderable.
+
+   The countdown above the list runs off `data-release="2026-10-29"` on `#countdown`. It counts to **local midnight**, and once the date passes it adds `is-released` to `<html>`, which hides both the clock and the notice and shows "Out now" — no edit needed on the day.
+3. **Retailer links (detail)** — in `index.html`, the `<ul class="retailers">` list. They currently point at ISBN searches (`9781959949046`) on Amazon, Barnes & Noble and Bookshop.org, which resolve once the book is listed. Swap in direct product URLs when you have them; Apple Books and Kobo rows are there commented out.
 3. ~~**Release date**~~ — done: **29 October 2026**, set in the hero meta, the "Get the book" copy, the social-card descriptions, `book:release_date`, and `datePublished` in the JSON-LD block.
 4. **Notify-me list** — wired for **Kit** (kit.com, free to 10k subscribers). One-time setup:
    1. Create a Kit account for Fate Squared (keep it separate from the FromZero list).
@@ -56,8 +59,8 @@ Workflow: edit → `git commit` → `git push`. Nothing to build.
 `index.html` links the stylesheet and script with a version query:
 
 ```html
-<link rel="stylesheet" href="styles.css?v=2">
-<script src="script.js?v=2" defer></script>
+<link rel="stylesheet" href="styles.css?v=3">
+<script src="script.js?v=3" defer></script>
 ```
 
 **Bump both numbers whenever you edit `styles.css` or `script.js`.** GitHub Pages
