@@ -859,7 +859,10 @@ main { counter-reset: sec; }
 .author__text p a { color: var(--cream); text-decoration-color: var(--magenta); text-underline-offset: 3px; }
 .author__text p a:hover { color: var(--gold-hi); }
 .author__more { margin-top: 1.8rem !important; }
-.author__more a {
+.author__more--tight { margin-top: 0.8rem !important; }
+.listen__read { margin-top: 1.6rem; }
+.author__more a,
+.listen__read a {
   display: inline-flex; align-items: center; gap: 0.5em;
   font-size: 0.78rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
   color: var(--gold); text-decoration: none;
@@ -867,9 +870,12 @@ main { counter-reset: sec; }
   padding-bottom: 0.25em;
   transition: color 0.3s, border-color 0.3s;
 }
-.author__more a span { transition: transform 0.4s var(--ease); }
-.author__more a:hover { color: var(--gold-hi); border-color: var(--gold-hi); }
-.author__more a:hover span { transform: translateX(4px); }
+.author__more a span,
+.listen__read a span { transition: transform 0.4s var(--ease); }
+.author__more a:hover,
+.listen__read a:hover { color: var(--gold-hi); border-color: var(--gold-hi); }
+.author__more a:hover span,
+.listen__read a:hover span { transform: translateX(4px); }
 
 /* Notify — the doorway.
    Elements marked data-needs-notify only show once the list is configured
