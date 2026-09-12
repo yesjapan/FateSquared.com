@@ -350,7 +350,7 @@ em { font-style: italic; }
   position: relative; z-index: 1;
 }
 
-/* Geometry: the cover file is 1030×1593; the spine on the print spread is 220px
+/* Geometry: the cover file is 995×1557; the spine on the print spread is 215px
    wide at the same scale — a ~1.2" block on a 5.5" trim (400+ pages). Thickness
    is derived from width so it stays in proportion at every size. */
 .book {
@@ -358,11 +358,11 @@ em { font-style: italic; }
   --ry: 0deg;
   --flip: 0deg;
   --book-w: min(360px, 78vw);
-  --book-thick: calc(var(--book-w) * 0.2136);
+  --book-thick: calc(var(--book-w) * 0.2161);
   --page-inset: 1.1%;
   position: relative; z-index: 1;
   width: var(--book-w);
-  aspect-ratio: 1030 / 1593;
+  aspect-ratio: 995 / 1557;
   perspective: 1800px;
   cursor: pointer;
   outline-offset: 12px;
